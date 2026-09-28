@@ -80,3 +80,4 @@ if __name__=="__main__":
     generate(a.image,a.output)
 
 # CI: regenerate portrait on source changes.
+# Canonical source image is kept at repository root for reproducible builds.
