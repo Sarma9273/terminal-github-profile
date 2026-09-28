@@ -1,62 +1,87 @@
 # Terminal GitHub Profile — Charan Mavuduru
 
-A GitHub-ready **animated dot-matrix portrait system** based on the supplied reference project.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Sarma9273/terminal-github-profile/main/portrait.svg"
+       alt="Charan Mavuduru — animated terminal dot-matrix portrait"
+       width="620">
+</p>
 
-## What this repository produces
+<p align="center">
+  <strong>AI & Cybersecurity · SOC · Security Engineering · RAG · Incident Response · Research</strong>
+</p>
 
-A centered portrait is converted into thousands of luminous green dots and exported as an animated SVG. The SVG is self-contained and can be embedded directly in a GitHub profile README.
+---
 
-### Pipeline
+This repository recreates the supplied **animated terminal-style dot-matrix portrait** as a reproducible GitHub asset.
+
+The README above is the actual showcase: the generated `portrait.svg` is embedded directly, so opening the repository displays the portrait rather than merely showing a link to it.
+
+## How it works
 
 ```text
-profile photo
-     ↓
+portrait photo
+      ↓
 OpenCV subject segmentation
-     ↓
+      ↓
 contrast / luminance sampling
-     ↓
+      ↓
 dot radius + opacity mapping
-     ↓
-native SVG animation
-     ↓
+      ↓
+animated SVG generation
+      ↓
 portrait.svg
+      ↓
+README display
 ```
 
-## Files
+## Repository structure
 
-- `generate.py` — OpenCV/Pillow generator
+- `1785407430921.png` — canonical source portrait
+- `portrait.svg` — generated animated dot-matrix output
+- `generate.py` — Python generator
 - `requirements.txt` — Python dependencies
-- `assets/profile.png` — source portrait
-- `portrait.svg` — generated animated output
-- `.github/workflows/generate-portrait.yml` — reproducible GitHub Actions build
+- `.github/workflows/generate-portrait.yml` — automatic regeneration workflow
+- `LICENSE` — MIT license
 
-## Automatic generation
+## Generator
 
-The GitHub Action generates `portrait.svg` whenever the generator or source portrait changes.
+The implementation follows the reference architecture:
 
-If `assets/profile.png` is absent, the workflow uses the public GitHub avatar for **Sarma9273** as the fallback source. To use the higher-quality portrait supplied for this project, replace `assets/profile.png` with that image and push it.
+- Pillow for image loading, grayscale conversion and resizing
+- OpenCV GrabCut for subject segmentation
+- connected-component cleanup and morphology
+- luminance-driven dot size and opacity
+- native SVG `<circle>` elements
+- SVG `<animate>` elements for the reveal/pulse cycle
+- self-contained output with no JavaScript dependency
 
-## Embed
+## Reproducible generation
+
+Install the dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Generate the portrait:
+
+```bash
+python generate.py 1785407430921.png --output portrait.svg
+```
+
+GitHub Actions also regenerates the SVG when the generator, requirements, source portrait, or workflow changes.
+
+## Reuse in another README
 
 ```html
 <p align="center">
   <img src="https://raw.githubusercontent.com/Sarma9273/terminal-github-profile/main/portrait.svg"
-       alt="Charan Mavuduru — animated dot portrait"
+       alt="Charan Mavuduru — animated terminal dot-matrix portrait"
        width="620">
 </p>
 ```
 
-## Profile focus
+## Featured profile areas
 
-**AI & Cybersecurity · SOC · Security Engineering · RAG · Incident Response · Research**
+**RA-XSOC Security Copilot · SentinelOps-AI · SynthoQuest · GURUVERSE**
 
-Featured work includes RA-XSOC Security Copilot, SentinelOps-AI, SynthoQuest and GURUVERSE.
-
-## Local generation
-
-```bash
-python -m pip install -r requirements.txt
-python generate.py assets/profile.png --output portrait.svg
-```
-
-MIT License.
