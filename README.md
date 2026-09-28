@@ -1,86 +1,45 @@
-# Sarma9273 — Terminal Profile
+# Terminal GitHub Profile — Charan Mavuduru
 
-> Interactive terminal-style developer & cybersecurity profile.
+A GitHub-ready animated terminal dot portrait generator and profile asset system.
 
-```text
-┌──────────────────────────────────────────────────────────────────────┐
-│  sarma@github:~$ whoami                                             │
-│                                                                      │
-│  Charan Mavuduru                                                     │
-│  AI & Cybersecurity • SOC • Security Engineering • Research         │
-│                                                                      │
-│  sarma@github:~$ help                                                │
-│  about       Profile and focus                                       │
-│  skills      Technical stack                                         │
-│  projects    Featured security and AI projects                       │
-│  experience  Current and previous work                               │
-│  education   Academic background                                     │
-│  contact     Public links                                            │
-│                                                                      │
-│  Type a command below or use the quick commands.                    │
-└──────────────────────────────────────────────────────────────────────┘
-```
+## Intended output
 
-## Profile
+The final asset is an animated, high-resolution dot-matrix portrait rendered as a self-contained SVG. It is designed for your GitHub profile README, project READMEs and your personal site.
 
-I work across **AI, cybersecurity, SOC engineering, security automation, and applied research**.
+## Architecture
 
-Current focus:
-- Security Operations & incident response
-- RAG-based security copilots
-- SIEM / SOC workflows
-- AI-assisted investigation
-- Linux, networking and defensive security
-- Practical cybersecurity education
+- Source: one portrait photo
+- Processing: OpenCV + Pillow
+- Subject isolation: GrabCut + morphological cleanup
+- Rendering: luminance-driven dot radius and opacity
+- Animation: native SVG animation
+- Output: one portable SVG with no browser runtime dependency
+- GitHub: committed SVG can be rendered directly in a README
 
-## Featured projects
+## Generate
 
-| Project | Focus |
-|---|---|
-| **RA-XSOC Security Copilot** | RAG-based security investigation and incident-response assistant |
-| **SentinelOps-AI** | AI-assisted security operations command center |
-| **SynthoQuest** | Cybersecurity education, labs and institutional technology |
-| **GURUVERSE** | Personal developer / portfolio platform |
+Requires Python 3.10+.
 
-## Stack
+1. Put your portrait at assets/profile.png.
+2. Install dependencies: python -m pip install -r requirements.txt
+3. Run: python generate.py assets/profile.png --output portrait.svg
+4. Commit portrait.svg.
 
-```text
-Languages      Python • JavaScript • TypeScript • HTML • CSS
-Security       SOC • SIEM • MITRE ATT&CK • Wireshark • Burp Suite
-AI / Data      RAG • FAISS • SentenceTransformers • NLP
-Infrastructure Docker • Linux • Git • GitHub
-Research       AI Security • Detection • Incident Response
-```
+For the best result, use a centered portrait with reasonable contrast and a simple background.
 
-## Education
+## Profile identity
 
-**IIT Patna** — Executive M.Tech, AI & Data Science
+Charan Mavuduru — AI & Cybersecurity, SOC / Security Engineering, RAG security copilots, RA-XSOC, SentinelOps-AI, SynthoQuest and GURUVERSE.
 
-**Aditya Institute of Technology and Management** — B.Tech, Electrical & Electronics Engineering
+## Embed in your GitHub profile README
 
-## Experience
+Use the raw SVG from this repository with an HTML image element pointing to:
+https://raw.githubusercontent.com/Sarma9273/terminal-github-profile/main/portrait.svg
 
-**Computer Teacher — Swaminarayan Gurukul International School**  
-Python • HTML • CSS • cybersecurity education
+## Important
 
-**Junior Design Engineer — Cadsys**
+The reference ZIP supplied for this project contains an example portrait. It is not used as your identity image. The personalized portrait must be generated from your own photo.
 
-## Links
+## License
 
-- GitHub: https://github.com/Sarma9273
-- Portfolio: https://github.com/Sarma9273/portfolio
-- Terminal profile: https://sarma9273.github.io/terminal-github-profile/
-
-## Run locally
-
-```bash
-git clone https://github.com/Sarma9273/terminal-github-profile.git
-cd terminal-github-profile
-python -m http.server 8000
-```
-
-Then open `http://localhost:8000`.
-
----
-
-Built as a standalone terminal-style profile for GitHub and GitHub Pages.
+MIT
