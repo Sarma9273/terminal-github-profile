@@ -18,20 +18,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Install Python dependencies
         run: python -m pip install -r requirements.txt
+
       - name: Fetch GitHub profile avatar when no source photo exists
         run: |
           mkdir -p assets
           if [ ! -f assets/profile.png ]; then
             curl -L --fail --retry 3 "https://avatars.githubusercontent.com/u/134950031?v=4" -o assets/profile.png
           fi
+
       - name: Generate animated SVG portrait
         run: python generate.py assets/profile.png --output portrait.svg
+
       - name: Commit generated portrait
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add portrait.svg assets/profile.png
-          git diff --cached --quiet || git commit -m "Generate animated profile portrait"
-          git push
+          git diff --cached --quiet && exit 0
+          git commit -m "Generate animated profile portrait"
+          git pull --rebase origin main
+          git push origin HEAD:main
