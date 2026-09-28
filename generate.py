@@ -78,3 +78,5 @@ if __name__=="__main__":
     a=p.parse_args()
     if not a.image.exists(): raise SystemExit(f"Input image not found: {a.image}")
     generate(a.image,a.output)
+
+# CI: regenerate portrait on source changes.
